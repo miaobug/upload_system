@@ -1,6 +1,6 @@
-# passage_upload
+# upload_system
 
-> A tool to upload passages for koala readli[ng app.ing app.
+> A tool to upload passages, news and books for koala reading app.
 
 ## Build Setup
 
