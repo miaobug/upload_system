@@ -1,11 +1,11 @@
 <template>
-  <div class="">
+  <div>
     <HeaderDiv></HeaderDiv>
-    <div class="div">
+    <div class="container">
       <NavBar></NavBar>
-    </div>
-    <div class="div">
-      <router-view></router-view>
+      <div class="childView">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -28,5 +28,10 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+  display: flex;
+}
+.childView {
+  flex: 1;
+}
 </style>

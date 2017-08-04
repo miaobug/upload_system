@@ -76,16 +76,38 @@
 </template>
 
 <script>
+  import router from '../router';
+
+  const urlMap = {
+    '2-4': '/stagePassage/upload',
+    '2-5': '/stagePassage/all',
+    '2-6': '/stagePassage/settype',
+  };
   export default {
     data() {
       return {
         theme: 'light',
         selectName: '',
+        tmp: this.$route.path,
       };
+    },
+    watch: {
+      $route(to) {
+        Object.keys(urlMap).forEach((key) => {
+          if (urlMap[key] === to.path) {
+            this.selectName = key;
+          }
+        });
+      },
     },
     methods: {
       select(name) {
         this.selectName = name;
+        if (urlMap[name] !== undefined) {
+          router.push(urlMap[name]);
+        } else {
+          router.push('/404');
+        }
       },
     },
   };
@@ -96,6 +118,7 @@
     font-size: 16px;
     font-weight: 700;
     margin-left: 10px;
+    border-right: 1px solid #ddd;
   }
   div.dib {
     margin-top: 20px;
