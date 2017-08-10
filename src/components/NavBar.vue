@@ -3,7 +3,7 @@
     <Row>
       <div class="sys-title">短文系统</div>
       <Col span="8">
-      <Menu :theme="theme"  v-bind:active-name="selectName" @on-select="select">
+      <Menu :theme="theme"  v-bind:active-name="selectName" :open-names="openName"  @on-select="select">
         <Submenu name="1">
           <template slot="title">
             <Icon type="ios-paper"></Icon>
@@ -36,7 +36,7 @@
     <Row>
       <div class="sys-title">新闻系统</div>
       <Col span="8">
-      <Menu :theme="theme"  v-bind:active-name="selectName" @on-select="select">
+      <Menu :theme="theme"  v-bind:active-name="selectName"  @on-select="select">
         <Menu-item name="3">
           <Icon type="ios-paper"></Icon>
           上传新闻
@@ -88,16 +88,16 @@
       return {
         theme: 'light',
         selectName: '',
-        tmp: this.$route.path,
+        openName: null,
       };
+    },
+    beforeMount() {
+      const path = this.$route.path;
+      this.updateNav(path);
     },
     watch: {
       $route(to) {
-        Object.keys(urlMap).forEach((key) => {
-          if (urlMap[key] === to.path) {
-            this.selectName = key;
-          }
-        });
+        this.updateNav(to.path);
       },
     },
     methods: {
@@ -108,6 +108,19 @@
         } else {
           router.push('/404');
         }
+      },
+      updateNav(path) {
+        Object.keys(urlMap).forEach((key) => {
+          if (urlMap[key] === path) {
+            this.selectName = key;
+            if (key[0] === '1') {
+              this.openName = ['1'];
+            }
+            if (key[0] === '2') {
+              this.openName = ['2'];
+            }
+          }
+        });
       },
     },
   };

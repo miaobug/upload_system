@@ -2,9 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Login from '@/components/Login';
 import MainPage from '@/components/MainPage';
+import HeaderPage from '@/components/HeaderPage';
 import NotFound from '@/components/NotFound';
 import UploadStagePassage from '@/components/stagePassage/UploadStagePassage';
 import AllStagePassage from '@/components/stagePassage/AllStagePassage';
+import StagePassage from '@/components/stagePassage/StagePassage';
 import SetType from '@/components/stagePassage/SetType';
 
 
@@ -31,6 +33,17 @@ export default new Router({
           path: '/page/2-6',
           component: SetType,
           alias: '/stagePassage/setType',
+        },
+      ],
+    },
+    {
+      path: '/headerPage',
+      component: HeaderPage,
+      children: [
+        {
+          path: '/headerPage/2-1/:id',
+          component: StagePassage,
+          alias: '/stagePassage/:id',
         },
       ],
     },
