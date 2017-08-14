@@ -23,13 +23,11 @@
           <Radio label="图片" style="width: 140px" ></Radio>
           <!--upload img-->
           <vue-core-image-upload
-            style="height: 120px;"
+            style="height: 30px; position: relative; top: -30px; left: 30px; width: 140px"
             crop="local"
             crop-ratio="2:1"
             @imageuploaded="imageuploaded2"
-            :max-file-size="maxSize"
             url="http://101.198.151.190/api/upload.php"
-            v-show="0"
             id="uploadImg2"
           >
           </vue-core-image-upload>
@@ -172,7 +170,8 @@
         if (key !== 'img') {
           this.passage.content.splice(this.editIndex, 0, item);
         } else {
-          document.getElementById('uploadImg2').fireEvent('click');
+          document.getElementById('uploadImg2').click();
+          console.log(133);
         }
         this.editType = undefined;
       },
