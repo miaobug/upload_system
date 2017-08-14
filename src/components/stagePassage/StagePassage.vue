@@ -174,7 +174,7 @@
         this.editType = undefined;
       },
       changed(index, event) {
-        console.log(index, event);
+//        console.log(index, event);
 //        if (event.key === 'Tab') {
 //          event.stopPropagation();
 //        }
