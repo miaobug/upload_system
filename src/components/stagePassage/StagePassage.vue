@@ -58,11 +58,12 @@
         </Select>
       </div>
 
-      <div v-for="(item, index) in passage.content" @click="editIndex = index">
-        <h2 v-if="item.type == 'title'" contenteditable="true" v-on:keyup="changed(index, $event)" v-on:blur="changed(index, $event)" v-on:paste="changed(index, $event)" v-on:delete="changed(index, $event)" v-on:focus="changed(index, $event)">
+      <div v-for="(item, index) in passage.content" @click="passage.editIndex = index" :class="{ 'border': passage.editIndex == index}">
+        <!--<h2 v-if="item.type == 'title'" contenteditable="true" v-on:keyup="changed(index, $event)" v-on:blur="changed(index, $event)" v-on:paste="changed(index, $event)" v-on:delete="changed(index, $event)" v-on:focus="changed(index, $event)">-->
+        <h2 v-if="item.type == 'title'" contenteditable="true" v-on:focus="changed(index, $event)">
           {{ item.text}}
         </h2>
-        <div v-if="item.type == 'paragraph'" contenteditable="true" v-on:keyup="changed(index, $event)" v-on:blur="changed(index, $event)" v-on:paste="changed(index, $event)" v-on:delete="changed(index, $event)" v-on:focus="changed(index, $event)">
+        <div v-if="item.type == 'paragraph'" contenteditable="true" v-on:focus="changed(index, $event)">
           {{ item.text}}
         </div>
         <div v-if="item.type == 'img'">
@@ -162,24 +163,21 @@
           图片: 'img',
         };
         const key = map[type];
-        this.editIndex = this.editIndex + 1;
+        this.passage.editIndex = this.passage.editIndex + 1;
         const item = {
           type: key,
-          text: '',
+          text: ' ',
         };
         if (key !== 'img') {
-          this.passage.content.splice(this.editIndex, 0, item);
-        } else {
-          document.getElementById('uploadImg2').click();
-          console.log(133);
+          this.passage.content.splice(this.passage.editIndex, 0, item);
         }
         this.editType = undefined;
       },
       changed(index, event) {
-//        console.log(index, event);
-        if (event.key === 'Tab') {
-          event.stopPropagation();
-        }
+        console.log(index, event);
+//        if (event.key === 'Tab') {
+//          event.stopPropagation();
+//        }
         this.editIndex = index;
         this.passage.content[index].text = event.target.innerText;
       },
@@ -230,5 +228,8 @@
   padding-bottom: 6px;
   border-bottom: 1px solid #999;
   display: flex;
+}
+.border {
+  border: solid 1px dodgerblue;
 }
 </style>
